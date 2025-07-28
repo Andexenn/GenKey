@@ -6,8 +6,45 @@
     <title>GenKey</title>
     <link rel="icon" type="image/png" href="./static/favicon.png" />
     <link rel="stylesheet" href="../static/output.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Saira+Stencil+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
-  <body>
+  <body class="min-h-screen w-full p-7 font-[montserrat] relative">
     <!-- TODO: using the flask to route and create db to store key and using hash to hash the key-->
+    <div
+      class="logo text-white text-[30px] shadow shadow-white inline-block p-2"
+    >
+      <a href="https://www.facebook.com/hung.phan.515158/" target="_blank">
+        <i class="fa-solid fa-key"></i>
+        <span class="font-[Saira_Stencil_One] font-bold">GenKey</span>
+      </a>
+    </div>
+
+    <h1 class="text-white text-[65px] text-center mt-10 font-semibold">
+      Generate Your Password
+    </h1>
+
+    <div class="btn text-center">
+      <button
+        class="bg-white p-5 rounded-[13px] font-semibold mt-25 text-[40px] cursor-pointer"
+      >
+        <h1 class="">Gen password</h1>
+      </button>
+    </div>
+
+    <p class="absolute bottom-5 text-white left-[590px]">
+      2025 Copyright HuynhHung. All rights reserved.
+    </p>
   </body>
 </html>
