@@ -1,31 +1,37 @@
-{% extends "index.html" %} 
+{% extends "index.html" %} {% block content %}
 
-{% block content %}
-
-<div class="handle p-10 bg-white h-[350px] w-[500px] text-center mx-auto mt-15 rounded-2xl" data-aos="zoom-in">
-    <form method="POST" action="{{url_for('gen')}}" >
-        <label class="text-[30px] font-semibold" for="username">Enter your name:</label>
-        <div class="input flex gap-1 items-center justify-center">
-            <input type="text" name="username" id="username" class="mt-5 flex-1 bg-[#2e2a5e] hover:outline-none hover:border-none text-white w-2/3 p-1">
-            <button class="bg-blue-600 cursor-pointer h-[30px]">Submit</button>
-        </div>
-        <p class="text-red-500 mt-2">
-            {% with message = get_flashed_messages()%}
-                {% if message %}
-                    {% for msg in message %}
-                        {{ msg }}
-                    {% endfor%}
-                {% endif %}
-            {% endwith %}
-        </p>
-    </form>
-
-    <div class="password mt-7">
-        <h1 class="text-[30px] font-semibold">Your password: </h1>
-        <p class="text-[25px]">{{ Pass }}</p>
+<div
+  class="handle p-10 bg-white h-[350px] w-[500px] text-center mx-auto mt-15 rounded-2xl"
+  data-aos="zoom-in"
+>
+  <form method="POST" action="{{url_for('gen')}}">
+    <label class="text-[30px] font-semibold" for="username"
+      >Enter your name:</label
+    >
+    <div class="input flex gap-1 items-center">
+      <input
+        type="text"
+        name="username"
+        id="username"
+        class="inline-block mt-5 flex-1 bg-[#2e2a5e] hover:outline-none hover:border-none text-white w-2/3 p-1 h-[40px] rounded-xl"
+      />
+      <button
+        type="submit"
+        class="bg-blue-600 cursor-pointer h-[40px] mb-auto rounded-xl p-1 block mt-5"
+      >
+        Submit
+      </button>
     </div>
+    <p class="text-red-500 mt-2">
+      {% with message = get_flashed_messages()%} {% if message %} {% for msg in
+      message %} {{ msg }} {% endfor%} {% endif %} {% endwith %}
+    </p>
+  </form>
+
+  <div class="password mt-7">
+    <h1 class="text-[30px] font-semibold">Your password:</h1>
+    <p class="text-[25px]">{{ Pass }}</p>
+  </div>
 </div>
-
-
 
 {% endblock %}

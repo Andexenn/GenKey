@@ -1,9 +1,29 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+import math
+import random
 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "HUNG"
+
+def generatePassword(length = 8):
+    lowerChars = "abcdefghijklmnopqrstuvwxyz";
+    numberChars = "0123456789";
+    specialChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+    allChars = lowerChars + numberChars + specialChars;
+    
+    password = "";
+
+    password += lowerChars[math.floor(random.random() * len(lowerChars))];
+    password += numberChars[math.floor(random.random() * len(numberChars))];
+    password += specialChars[math.floor(random.random() * len(specialChars))];
+
+    for i in range(3, 8):
+        password += allChars[math.floor(random.random() * len(allChars))];
+    
+
+    return password
 
 @app.route('/')
 def home():
@@ -18,8 +38,14 @@ def gen():
             flash("You've not entered user name")
             return redirect(url_for('gen'))
         else:
-            Pass="123"
-            return render_template('gen.html', Pass="123")
+            # try:
+            #     data = request.get_json()
+            #     Pass = data.get("password")
+            # except:
+            #     raise ValueError("Khong nhan duoc gia tri")
+            Pass = generatePassword(8)
+            
+            return render_template('gen.html', Pass=Pass)
             # flash("Your name has been used", "info")
     return render_template('gen.html')
 
