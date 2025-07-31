@@ -46,3 +46,16 @@ def register_routes(app, db):
 
                 return render_template('gen.html', Pass=Pass)
         return render_template('gen.html')
+    
+    @app.route('/find', methods=['GET', 'POST'])
+    def find():
+        if request.method == 'POST':
+            username = request.form.get("username")
+            user = User.query.filter(User.username == username).first()
+            if user:
+                return render_template("find.html", password=user.password)
+            else:
+                flash("Your name was not found!")
+                return render_template("find.html")
+            
+        return render_template("find.html")
