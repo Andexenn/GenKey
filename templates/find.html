@@ -23,7 +23,9 @@
         {% if message %} 
           {% for msg in message %} 
             {{ msg }} 
+            <a class="text-blue-500 underline" href="{{url_for('gen')}}">Gen your password</a>
           {% endfor%}
+          
         {% endif %}
       {% endwith %}
     </p>
