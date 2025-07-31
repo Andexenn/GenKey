@@ -1,53 +1,22 @@
-from flask import Flask, render_template, flash, request, redirect, url_for
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import math
-import random
+from flask_migrate import Migrate
 
+db = SQLAlchemy()
 
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "HUNG"
+def create_app():
+    app = Flask(__name__, template_folder = 'templates')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./userdb.db'
+    app.config['SECRET_KEY'] = "SOMEKEY"
+    db.init_app(app)
 
-def generatePassword(length = 8):
-    lowerChars = "abcdefghijklmnopqrstuvwxyz";
-    numberChars = "0123456789";
-    specialChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
-    allChars = lowerChars + numberChars + specialChars;
+    # imports later on 
     
-    password = "";
+    from routes import register_routes
+    register_routes(app, db)
 
-    password += lowerChars[math.floor(random.random() * len(lowerChars))];
-    password += numberChars[math.floor(random.random() * len(numberChars))];
-    password += specialChars[math.floor(random.random() * len(specialChars))];
+    migrate = Migrate(app, db)
 
-    for i in range(3, 8):
-        password += allChars[math.floor(random.random() * len(allChars))];
-    
+    return app
 
-    return password
 
-@app.route('/')
-def home():
-    return render_template("index.html")
-
-@app.route('/gen', methods=['GET', 'POST'])
-def gen():
-    # TODO: consider the methods get or post, create the pass
-    if request.method == "POST":
-        user_name = request.form["username"]
-        if not user_name:
-            flash("You've not entered user name")
-            return redirect(url_for('gen'))
-        else:
-            # try:
-            #     data = request.get_json()
-            #     Pass = data.get("password")
-            # except:
-            #     raise ValueError("Khong nhan duoc gia tri")
-            Pass = generatePassword(8)
-            
-            return render_template('gen.html', Pass=Pass)
-            # flash("Your name has been used", "info")
-    return render_template('gen.html')
-
-if __name__ == "__main__":
-    app.run(debug=True)
